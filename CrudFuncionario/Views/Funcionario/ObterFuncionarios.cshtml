@@ -1,0 +1,40 @@
+﻿@model IEnumerable<CrudFuncionario.Models.Funcionario>
+
+@{
+    ViewBag.Title = "Funcionarios";
+}
+
+<h2>Lista de Funcionarios</h2>
+
+<p>
+    @Html.ActionLink("Adicionar Novo Funcionario", "IncluirFuncionario")
+</p>
+<div>@Html.Raw(ViewBag.Error)</div>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Idade)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Idade)
+        </td>
+        <td>
+            @Html.ActionLink("Alterar", "EditarFuncionario", new { id = item.FuncionarioId }) |
+            @Html.ActionLink("Excluir", "ExcluirFuncionario", new { id = item.FuncionarioId }, new { onclick = "return confirm('Tem certeza que deseja excluir ?');" })|
+            @Html.ActionLink("Dependentes", "VisualizarDependentes", new { id = item.FuncionarioId })
+        </td>
+    </tr>
+}
+
+</table>
